@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ board.name }} - {{ block.super }}
+{% endblock %}
+
+{% block breadcrumb %}
+
+    <li class="breadcrumb-item" ><a href="{% url 'home' %}"> Boards </a> </li>
+    <li class="braedcrumb-item" >/ {{ board.name }}</li>
+{% endblock %}
+
+{% block content %} 
+<div class="mb-4">
+    <a href="{% url 'home' %}" class="btn btn-primary"> Back </a>
+    <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary"> New </a>
+</div>
+
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th> Topic </th>
+                <th> Starter </th>
+                <th> Replies </th>
+                <th> Views </th>
+                <th> Last Update </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for topic in board.topics.all %}
+                <tr>
+                    <th> {{ topic.subject }} </th>
+                    <th> {{ topic.starter.username }} </th>
+                    <th> 0 </th>
+                    <th> 0 </th>
+                    <th> {{ topic.last_updated }} </th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
